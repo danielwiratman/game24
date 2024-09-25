@@ -68,12 +68,20 @@ def find_possible_answers(numbers: list[int]):
 
     return possible_answers
 
+def question_contraints(numbers: list[int], answers: list[str]):
+    # return len(set(numbers)) == 1 and len(answers) > 0
+    # return len(set(answers)) == 1
+    return len(answers) == 0 and len(set(numbers)) == 1
+
 numbers: list[int] = []
 numbers = generate_numbers()
 answers = find_possible_answers(numbers)
-while len(answers) == 0:
+condition_to_meet = question_contraints(numbers, answers)
+
+while not condition_to_meet:
     numbers = generate_numbers()
     answers = find_possible_answers(numbers)
+    condition_to_meet = question_contraints(numbers, answers)
 
 print("Your numbers are:")
 print_numbers_in_ascii(numbers)
